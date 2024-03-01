@@ -8,14 +8,17 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemyBalls;
     public float startDelay = 2;
     public float repeatDelay = 2;
-    public float spawnBoundaryX;
-    private float spawnPositionY = 20;
+    private float spawnBoundaryX;
+    private static float spawnPositionY;
+
     private BoxCollider2D floorCollider;
     // Start is called before the first frame update
     void Start()
     {
         floorCollider = GameObject.Find("Floor").GetComponent<BoxCollider2D>();
         spawnBoundaryX = floorCollider.bounds.extents.x;
+        spawnPositionY = GameObject.Find("Roof").transform.position.y;
+
         InvokeRepeating("SpawnEnemyBall", startDelay, repeatDelay);
     }
 
@@ -27,12 +30,14 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemyBall()
     {
+        Vector3 spawnPosition = CalculateSphereSpawnPos();
+        //int spawnBall = UnityEngine.Random.Range(0, enemyBalls.Length);
+        GameObject evilSphere = Instantiate(enemyBalls[0], spawnPosition, enemyBalls[0].transform.rotation);
+        evilSphere.GetComponent<EvilSphereBehaviour>().CalculateSphereDirection();
+    }
+
+    private Vector3 CalculateSphereSpawnPos(){
         float spawnPositionX = UnityEngine.Random.Range(-spawnBoundaryX, spawnBoundaryX);
-        Vector3 spawnPosition = new Vector3(spawnPositionX, spawnPositionY, 0);
-        int spawnBall = UnityEngine.Random.Range(0, enemyBalls.Length);
-        GameObject evilBall = Instantiate(enemyBalls[spawnBall], spawnPosition, enemyBalls[spawnBall].transform.rotation);
-        evilBall.GetComponent<EvilSphereBehaviour>().ballXSpeed = UnityEngine.Random.Range(-5, 5);
-        double xBallSpeed = evilBall.GetComponent<EvilSphereBehaviour>().ballXSpeed;
-        evilBall.GetComponent<EvilSphereBehaviour>().ballYSpeed = (float)Math.Sqrt(Math.Pow(Math.Sqrt(50), 2) - Math.Pow(xBallSpeed, 2));
+        return new Vector3(spawnPositionX, spawnPositionY, 0);
     }
 }

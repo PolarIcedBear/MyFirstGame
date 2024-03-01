@@ -7,10 +7,12 @@ public class CapsuleControl : MonoBehaviour
     public float horizontalInput;
     public float horizontalSpeed;
     public float currentSpeed;
+    private float xBoundaries;
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, 3, 0);
+        transform.position = new Vector3(0, -2, 0);
+        xBoundaries = GameObject.Find("Floor").GetComponent<Collider2D>().bounds.extents.x - 1;
     }
 
     // Update is called once per frame
@@ -19,7 +21,7 @@ public class CapsuleControl : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal1");
         currentSpeed = horizontalSpeed;
         
-        if((transform.position.x <= -9 && horizontalInput < 0) || (transform.position.x >= 9 && horizontalInput > 0)){
+        if((transform.position.x <= -xBoundaries && horizontalInput < 0) || (transform.position.x >= xBoundaries && horizontalInput > 0)){
             currentSpeed = 0;
         }
 

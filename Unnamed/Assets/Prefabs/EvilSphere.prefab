@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3645021645590843017}
   - component: {fileID: 1244491607805218226}
   - component: {fileID: 7432384615508971044}
+  - component: {fileID: -1030100095651668502}
   m_Layer: 0
   m_Name: EvilSphere
   m_TagString: Untagged
@@ -100,3 +101,19 @@ MonoBehaviour:
   ballYSpeed: 5
   ballXSpeed: 5
   evilBallToSpawn: {fileID: 0}
+--- !u!58 &-1030100095651668502
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887332500670328683}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

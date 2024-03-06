@@ -9,13 +9,14 @@ public class EvilSphereBehaviour : MonoBehaviour
     public float ballYSpeed;
     public float ballXSpeed;
     public GameObject evilBallToSpawn;
+    private GameManager gameManager;
     private const float X_SPHERE_MAX_SPEED = 10;
     private const float Y_SPHERE_MAX_SPEED = 10;
     private static double sphereSpeed = Math.Sqrt(Math.Pow(X_SPHERE_MAX_SPEED, 2) + Math.Pow(Y_SPHERE_MAX_SPEED, 2));
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class EvilSphereBehaviour : MonoBehaviour
                 Instantiate(evilBallToSpawn, gameObject.transform);
                 }*/
                 Destroy(gameObject);
+                gameManager.UpdateCounting();
                 break;
             case "player":
                 Destroy(other.gameObject);
